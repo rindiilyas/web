@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 2nd Anniversary 💕</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      font-family: "Poppins", sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 3s ease;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+      text-align: center;
+      width: 80%;
+    }
+
+    .heart {
+      font-size: 60px;
+      color: red;
+      animation: pulse 1s infinite;
+      cursor: pointer;
+      margin-top: 20px;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Efek konfeti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      opacity: 0.8;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0); }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Catatan cinta */
+    .note {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1.1em;
+      backdrop-filter: blur(6px);
+      animation: floatUp 3s ease forwards;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-150px); opacity: 0; }
+    }
+
+    /* Tombol musik opsional */
+    .music-btn {
+      margin-top: 15px;
+      background: white;
+      color: #ff69b4;
+      border: none;
+      border-radius: 25px;
+      padding: 8px 18px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: "Poppins", sans-serif;
+      transition: 0.3s;
+    }
+
+    .music-btn:hover {
+      background: #ffe6f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>💞 Happy 2nd Anniversary 💞</h1>
+  <p>Untuk cowokku tersayang 💌<br>
+     Davin Muhammad Ramzy<br>
+     Makasi udah bertahan sama aku ya sayang, ga nyangka kita bisa sesabar ini<br>
+     kita bakal terus bareng bareng yahh sampai tua nanti, masalah apapun besar atau kecil💫<br>
+     jangan sampai pisah yahhh, janji harus terus sama aku, bareng aku, disamping aku.<br>
+     makin cinta makin sayangggg. i love youuuuuuuuuu tak terhingggaaaaa!!!!
+  </p>
+
+  <div class="heart" id="heart">❤️</div>
+
+  <button class="music-btn" id="musicBtn">🎵 Putar Musik</button>
+
+  <script>
+    // Efek konfeti berwarna
+    for (let i = 0; i < 40; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(confetti);
+    }
+
+    // Siapkan musik
+    const music = new Audio("https://www.bensound.com/bensound-music/bensound-love.mp3");
+    music.loop = true;
+
+    const heart = document.getElementById("heart");
+    const musicBtn = document.getElementById("musicBtn");
+
+    // Klik tombol untuk memutar musik
+    musicBtn.addEventListener("click", () => {
+      music.play();
+      musicBtn.textContent = "🎶 Musik Sedang Diputar...";
+      musicBtn.disabled = true;
+    });
+
+    // Pesan cinta saat hati ditekan
+    const messages = [
+      "Maaf telat sayang, aku buatin dulu💖",
+      "Aku cinta davin selamanya 💖",
+      "Davin dunianya rindi💫",
+      "Makasi udah selalu ada🌹",
+      "Ayok dua tahun lebih kuatttt💪💞",
+      "Aku bersyukur punya davin💕",
+      "Davin selalu ada buat rindi",
+      "Love you  foreverrrrr🌙",
+      "Jangan tinggalin aku 💌",
+      "Rindi sayang davin",
+      "Aku mau sama davin terusss💕",
+      "Terus bareng bareng ya sayang💕",
+  ];
+
+    heart.addEventListener("click", () => {
+      // Mulai musik otomatis saat hati pertama kali ditekan
+      if (music.paused) music.play();
+
+      // Pilih pesan acak
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+
+      // Buat elemen note
+      const note = document.createElement("div");
+      note.classList.add("note");
+      note.textContent = msg;
+      note.style.left = (Math.random() * 70 + 15) + "vw";
+      note.style.top = "60vh";
+
+      document.body.appendChild(note);
+
+      // Hapus note setelah 3 detik
+      setTimeout(() => note.remove(), 3000);
+    });
+  </script>
+</body>
+</html>
